@@ -60,7 +60,7 @@ public static class JSDevServerMiddleware
 			return logger;
 		}
 
-		async Task<bool> StartJSDevServer(
+		static async Task<bool> StartJSDevServer(
 			string sourcePath,
 			string scriptName,
 			string pkgManagerCommand,
@@ -72,7 +72,8 @@ public static class JSDevServerMiddleware
 		)
 		{
 			logger.LogInformation($"Starting dev server...");
-			var scriptRunner = new NodeScriptRunner(sourcePath, scriptName, pkgManagerCommand, applicationStoppingToken);
+			var scriptRunner = new NodeScriptRunner(sourcePath, scriptName, pkgManagerCommand);
+			scriptRunner.Start(applicationStoppingToken);
 			var isReady = await PingUri(logger, uri, timeout);
 			return isReady;
 		}

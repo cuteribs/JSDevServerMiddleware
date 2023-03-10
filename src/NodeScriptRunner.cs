@@ -1,19 +1,12 @@
-using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace Cuteribs.JSDevServerMiddleware;
 
 public class NodeScriptRunner : IDisposable
 {
-	private Process? _npmProcess;
+	private readonly Process _process;
 
-	public NodeScriptRunner(
-		string workingDirectory,
-		string scriptName,
-		string pkgManagerCommand,
-		CancellationToken applicationStoppingToken
-	)
+	public NodeScriptRunner(string workingDirectory, string scriptName, string pkgManagerCommand)
 	{
 		if (string.IsNullOrEmpty(workingDirectory))
 		{
@@ -46,32 +39,34 @@ public class NodeScriptRunner : IDisposable
 			WorkingDirectory = workingDirectory
 		};
 
-		try
+		_process = new()
 		{
-			var process = Process.Start(startInfo)!;
-			process.EnableRaisingEvents = true;
-			_npmProcess = process;
-		}
-		catch (Exception ex)
-		{
-			var message = $"Failed to start '{pkgManagerCommand}'. To resolve this:.\n\n"
-						+ $"[1] Ensure that '{pkgManagerCommand}' is installed and can be found in one of the PATH directories.\n"
-						+ $"    Current PATH enviroment variable is: {Environment.GetEnvironmentVariable("PATH")}\n"
-						+ "    Make sure the executable is in one of those directories, or update your PATH.\n\n"
-						+ "[2] See the InnerException for further details of the cause.";
-			throw new InvalidOperationException(message, ex);
-		}
-
-		applicationStoppingToken.Register(((IDisposable)this).Dispose);
+			StartInfo = startInfo,
+			EnableRaisingEvents = true
+		};
 	}
 
-
-	void IDisposable.Dispose()
+	public void Start(CancellationToken cancellationToken)
 	{
-		if (_npmProcess != null && !_npmProcess.HasExited)
+		try
 		{
-			_npmProcess.Kill(entireProcessTree: true);
-			_npmProcess = null;
+			_process.Start();
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+
+		cancellationToken.Register(((IDisposable)this).Dispose);
+	}
+
+	public void Dispose()
+	{
+		if (!_process.HasExited)
+		{
+			_process.Kill(true);
+			_process.Dispose();
+			GC.SuppressFinalize(this);
 		}
 	}
 }
