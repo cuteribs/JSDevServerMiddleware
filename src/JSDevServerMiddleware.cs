@@ -4,12 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using System;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Cuteribs.JSDevServerMiddleware;
 public static class JSDevServerMiddleware
@@ -18,6 +14,11 @@ public static class JSDevServerMiddleware
 
 	public static void Attach(ISpaBuilder spaBuilder, Uri devServerUri)
 	{
+		if (devServerUri.Scheme != "http" && devServerUri.Scheme != "https")
+		{
+			throw new ArgumentException($"Unsupported URI: {devServerUri.Scheme}");
+		}
+
 		var options = spaBuilder.Options;
 		var sourcePath = options.SourcePath;
 
