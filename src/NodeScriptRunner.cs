@@ -56,11 +56,17 @@ public class NodeScriptRunner : IDisposable
 	{
 		if (!_process.HasExited)
 		{
-			_process.Kill(true);
-			_process.Dispose();
+			this.Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 	}
 
-	protected virtual void Dispose(bool disposing) { }
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+			_process.Kill(true);
+			_process.Dispose();
+		}
+	}
 }
