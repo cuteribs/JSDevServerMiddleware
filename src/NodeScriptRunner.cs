@@ -61,4 +61,6 @@ public class NodeScriptRunner : IDisposable
 			GC.SuppressFinalize(this);
 		}
 	}
+
+	protected virtual void Dispose(bool disposing) { }
 }
