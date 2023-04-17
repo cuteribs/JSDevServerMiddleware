@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build and analyze
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: Set up JDK 11
@@ -26,7 +26,7 @@ jobs:
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
-          path: ~\sonar\cache
+          path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
@@ -34,7 +34,7 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v3
         with:
-          path: .\.sonar\scanner
+          path: ~/.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       
@@ -45,18 +45,16 @@ jobs:
 
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          mkdir ~/.sonar/scanner
+          dotnet tool update dotnet-sonarscanner --tool-path ~/.sonar/scanner
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"cuteribs_JSDevServerMiddleware" /o:"cuteribs" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"   
+          ~/.sonar/scanner/dotnet-sonarscanner begin /k:"cuteribs_JSDevServerMiddleware" /o:"cuteribs" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"   
           cd src
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          ~/.sonar/scanner\scanner\dotnet-sonarscanner end /d:sonar.login="$(SONAR_TOKEN"
