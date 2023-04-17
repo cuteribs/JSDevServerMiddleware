@@ -57,4 +57,4 @@ jobs:
           ~/.sonar/scanner/dotnet-sonarscanner begin /k:"cuteribs_JSDevServerMiddleware" /o:"cuteribs" /d:sonar.login="${{ env.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"   
           cd src
           dotnet build
-          ~/.sonar/scanner\scanner\dotnet-sonarscanner end /d:sonar.login="${{ env.SONAR_TOKEN }}"
+          ~/.sonar/scanner/scanner/dotnet-sonarscanner end /d:sonar.login="${{ env.SONAR_TOKEN }}"
