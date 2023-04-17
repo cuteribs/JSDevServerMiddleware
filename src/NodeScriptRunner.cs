@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace Cuteribs.JSDevServerMiddleware;
 
-public class NodeScriptRunner : IDisposable
+public sealed class NodeScriptRunner : IDisposable
 {
 	private readonly Process _process;
 
@@ -56,17 +56,9 @@ public class NodeScriptRunner : IDisposable
 	{
 		if (!_process.HasExited)
 		{
-			this.Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-	}
-
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
 			_process.Kill(true);
 			_process.Dispose();
+			GC.SuppressFinalize(this);
 		}
 	}
 }
