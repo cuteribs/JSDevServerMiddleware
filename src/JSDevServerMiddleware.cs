@@ -34,7 +34,6 @@ public static class JSDevServerMiddleware
 			.GetRequiredService<IHostApplicationLifetime>()
 			.ApplicationStopping;
 		var logger = GetOrCreateLogger(appBuilder);
-		var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
 		var timeout = options.StartupTimeout;
 		var startTask = StartJSDevServer(
 			sourcePath,
@@ -43,7 +42,6 @@ public static class JSDevServerMiddleware
 			devServerUri,
 			(int)timeout.TotalSeconds,
 			logger,
-			diagnosticSource,
 			applicationStoppingToken
 		);
 
@@ -68,7 +66,6 @@ public static class JSDevServerMiddleware
 			Uri uri,
 			int timeout,
 			ILogger logger,
-			DiagnosticSource diagnosticSource,
 			CancellationToken applicationStoppingToken
 		)
 		{
@@ -95,7 +92,11 @@ public static class JSDevServerMiddleware
 				await client.GetAsync(uri);
 				return true;
 			}
-			catch (SocketException) { }
+			catch (SocketException ex)
+			{
+				logger.LogError(ex, "Ping Error", uri);
+			}
+
 			await Task.Delay(1000);
 		}
 

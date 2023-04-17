@@ -48,15 +48,7 @@ public class NodeScriptRunner : IDisposable
 
 	public void Start(CancellationToken cancellationToken)
 	{
-		try
-		{
-			_process.Start();
-		}
-		catch (Exception)
-		{
-			throw;
-		}
-
+		_process.Start();
 		cancellationToken.Register(((IDisposable)this).Dispose);
 	}
 
