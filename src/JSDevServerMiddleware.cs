@@ -79,7 +79,7 @@ public static class JSDevServerMiddleware
 
 	private static async Task<bool> PingUri(ILogger logger, Uri uri, int timeout = 60)
 	{
-		logger.LogInformation($"Trying to access {uri}");
+		logger.LogInformation("Trying to access {uri}", uri);
 		timeout *= 1000;
 		var watch = new Stopwatch();
 		watch.Start();
