@@ -1,0 +1,35 @@
+name: DNV.ApiClients.Veracity.DataPlatform.DataApi
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - "**"
+    paths:
+    - 'src/**'
+    - '.github/workflows/nuget-publish.yml'
+
+env:
+  RELEASE: false
+  NUGET_OUTPUT: nuget-output
+        
+jobs:
+  nuget-publish:
+    name: NuGet Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: Setup .Net
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Pack
+        working-directory: src
+        run: dotnet pack --configuration Release -o ${{ env.NUGET_OUTPUT }}
+
+      - name: Publish
+        working-directory: src
+        run: dotnet nuget push --skip-duplicate '${{ env.NUGET_OUTPUT }}/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
