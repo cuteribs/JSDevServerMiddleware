@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+		<LangVersion>Latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<Authors>Cuteribs &lt;ericfine1981@live.com&gt;</Authors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(RELEASE)' != 'true'">
+		<VersionSuffix>preview.$([System.DateTime]::UtcNow.ToString("yyMMddHHmm"))</VersionSuffix>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.18" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0-preview.5.23302.2" />
+	</ItemGroup>
+</Project>

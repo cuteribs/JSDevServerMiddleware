@@ -4,15 +4,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using System;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Cuteribs.JSDevServerMiddleware;
 public static class JSDevServerMiddleware
 {
 	private const string LogCategoryName = "Cuteribs.JSDevServerMiddleware";
 
-	public static void Attach(ISpaBuilder spaBuilder, Uri devServerUri)
+	public static void Attach(ISpaBuilder spaBuilder, Uri devServerUri, string npmScript = "start")
 	{
 		if (devServerUri.Scheme != "http" && devServerUri.Scheme != "https")
 		{
@@ -37,7 +41,7 @@ public static class JSDevServerMiddleware
 		var timeout = options.StartupTimeout;
 		var startTask = StartJSDevServer(
 			sourcePath,
-			"start",
+			npmScript,
 			pkgManagerCommand,
 			devServerUri,
 			(int)timeout.TotalSeconds,
@@ -92,9 +96,13 @@ public static class JSDevServerMiddleware
 				await client.GetAsync(uri);
 				return true;
 			}
-			catch (SocketException ex)
+			catch (SocketException)
 			{
-				logger.LogError(ex, "Ping Error", uri);
+				logger.LogInformation("Ping Error at {url}", uri);
+			}
+			catch (Exception)
+			{
+				logger.LogInformation("Error at {url}", uri);
 			}
 
 			await Task.Delay(1000);
