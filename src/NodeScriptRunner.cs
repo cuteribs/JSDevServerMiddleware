@@ -44,7 +44,7 @@ public sealed class NodeScriptRunner : IDisposable
 		_process = new()
 		{
 			StartInfo = startInfo,
-			EnableRaisingEvents = true
+			//EnableRaisingEvents = true
 		};
 	}
 

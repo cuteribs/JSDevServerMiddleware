@@ -96,13 +96,13 @@ public static class JSDevServerMiddleware
 				await client.GetAsync(uri);
 				return true;
 			}
-			catch (SocketException)
+			catch (SocketException ex)
 			{
-				logger.LogInformation("Ping Error at {url}", uri);
+				logger.LogInformation("Ping Error at {url}: {message}", uri, ex.Message);
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				logger.LogInformation("Error at {url}", uri);
+				logger.LogInformation("Error at {url}: {message}", uri, ex.Message);
 			}
 
 			await Task.Delay(1000);

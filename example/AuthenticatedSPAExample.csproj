@@ -15,9 +15,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="T:\JSDevServerMiddleware\src\Cuteribs.JSDevServerMiddleware.csproj" />
+		<ProjectReference Include="..\src\Cuteribs.JSDevServerMiddleware.csproj" />
 	</ItemGroup>
-
+	
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
