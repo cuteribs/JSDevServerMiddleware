@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cuteribs.JSDevServerMiddlew
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{3AEB0BF4-CF24-4454-9A72-69757A906658}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViteSPAExample", "example\SPAExample\ViteSPAExample.csproj", "{6DDD1269-5935-41C1-81A2-B4FC10D653F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPAExample", "example\SPAExample\SPAExample.csproj", "{6DDD1269-5935-41C1-81A2-B4FC10D653F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticatedSPAExample", "example\AuthenticatedSPAExample\AuthenticatedSPAExample.csproj", "{4DB8E37C-E0ED-41C4-990E-508D4351223F}"
 EndProject
