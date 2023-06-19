@@ -5,7 +5,18 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cuteribs.JSDevServerMiddleware", "src\Cuteribs.JSDevServerMiddleware.csproj", "{F5938200-B6EA-4FC7-A839-1094C181339B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticatedSPAExample", "example\AuthenticatedSPAExample.csproj", "{B983F606-26C4-4BEA-B77D-FFFD0EEE0689}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{3AEB0BF4-CF24-4454-9A72-69757A906658}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViteSPAExample", "example\SPAExample\ViteSPAExample.csproj", "{6DDD1269-5935-41C1-81A2-B4FC10D653F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticatedSPAExample", "example\AuthenticatedSPAExample\AuthenticatedSPAExample.csproj", "{4DB8E37C-E0ED-41C4-990E-508D4351223F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCCDF850-5E0D-4224-9131-DD383F2245AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{346EF6B7-11E5-402D-96C1-5E328C03C6B0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +28,22 @@ Global
 		{F5938200-B6EA-4FC7-A839-1094C181339B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5938200-B6EA-4FC7-A839-1094C181339B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5938200-B6EA-4FC7-A839-1094C181339B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B983F606-26C4-4BEA-B77D-FFFD0EEE0689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B983F606-26C4-4BEA-B77D-FFFD0EEE0689}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B983F606-26C4-4BEA-B77D-FFFD0EEE0689}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B983F606-26C4-4BEA-B77D-FFFD0EEE0689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD1269-5935-41C1-81A2-B4FC10D653F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD1269-5935-41C1-81A2-B4FC10D653F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD1269-5935-41C1-81A2-B4FC10D653F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD1269-5935-41C1-81A2-B4FC10D653F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB8E37C-E0ED-41C4-990E-508D4351223F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB8E37C-E0ED-41C4-990E-508D4351223F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DB8E37C-E0ED-41C4-990E-508D4351223F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DB8E37C-E0ED-41C4-990E-508D4351223F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F5938200-B6EA-4FC7-A839-1094C181339B} = {DCCDF850-5E0D-4224-9131-DD383F2245AB}
+		{6DDD1269-5935-41C1-81A2-B4FC10D653F4} = {3AEB0BF4-CF24-4454-9A72-69757A906658}
+		{4DB8E37C-E0ED-41C4-990E-508D4351223F} = {3AEB0BF4-CF24-4454-9A72-69757A906658}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A198AA48-D6BA-47F1-B4B3-29D6D516D7EF}

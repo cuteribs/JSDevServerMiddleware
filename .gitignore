@@ -2,3 +2,6 @@
 **/obj/
 **/*.suo
 **/.vs/
+**/node_modules/
+**/.parcel-cache/
+**/dist/

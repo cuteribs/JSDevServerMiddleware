@@ -1,4 +1,4 @@
-name: DNV.ApiClients.Veracity.DataPlatform.DataApi
+name: NuGet Publish
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
 env:
   RELEASE: false
   NUGET_OUTPUT: nuget-output
-        
+
 jobs:
   nuget-publish:
     name: NuGet Publish
