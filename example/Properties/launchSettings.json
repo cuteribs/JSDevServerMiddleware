@@ -1,7 +1,7 @@
 ﻿{
 	"profiles": {
-		"Project2": {
-			"commandName": "Example",
+		"ExampleApp": {
+			"commandName": "Project",
 			"launchBrowser": true,
 			"applicationUrl": "https://localhost:5001",
 			"environmentVariables": {
